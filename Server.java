@@ -4,17 +4,17 @@ import java.sql.*;
 import java.util.Vector;
 class ServerThread extends Thread{
 private Socket socket;
-private BufferedReader in;//
-private PrintWriter out;//
-int no;//
-public ServerThread(Socket s) throws IOException {//
-   socket=s;//
-  in=new BufferedReader(new InputStreamReader(socket.getInputStream()));//
-  out=new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())),true);//
-   start();//
+private BufferedReader in;
+private PrintWriter out;
+int no;
+public ServerThread(Socket s) throws IOException {
+   socket=s;
+  in=new BufferedReader(new InputStreamReader(socket.getInputStream()));
+  out=new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())),true);
+   start();
    }
 
-public void run(){//
+public void run(){
  try{ while(true){
                     String str=in.readLine();//
                     if(str.equals("end"))break;//
@@ -279,8 +279,8 @@ try{ Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
        prepare7.setInt(2,friendicqno);
        int  r7=0;
       r7=prepare7.executeUpdate();
-      if(r7==1) System.out.println("ok  delfrien");//成功
-      else  System.out.println("false delfriend");//失败
+      if(r7==1) System.out.println("ok  delfrien");
+      else  System.out.println("false delfriend");
 }catch (Exception e){e.printStackTrace();System.out.println("del false");}
 }//end delete friend
 
