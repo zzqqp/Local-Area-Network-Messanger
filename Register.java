@@ -25,7 +25,7 @@ public class Register extends JDialog {//
   JLabel jLabel8 = new JLabel();
   JComboBox place = new JComboBox();
   JComboBox headpic = new JComboBox();
-//***************************
+
  private String[] pics = new String[] {
 		"1.jpg", "3.jpg",
 		"5.jpg", "7.jpg"};
@@ -39,9 +39,9 @@ int serverport;
       jbInit();
       pack();
     }
-    catch(Exception ex) {
+    catch(Exception e) {
       ex.printStackTrace();}
-    //this(null, "", true);
+   
   }
   void jbInit() throws Exception {
     panel1.setLayout(null);
@@ -53,7 +53,7 @@ int serverport;
     jLabel1.setText("Name");
     jLabel1.setBounds(new Rectangle(9, 45, 41, 18));
     nickname.setBounds(new Rectangle(50, 44, 128, 22));
-    jLabel2.setText("Your information");
+    jLabel2.setText("Your Info");
     jLabel2.setBounds(new Rectangle(9, 9, 103, 18));
     jLabel3.setText("Password");
     jLabel3.setBounds(new Rectangle(200, 44, 41, 18));
@@ -63,7 +63,7 @@ int serverport;
     email.setBounds(new Rectangle(55, 96, 124, 22));
     jLabel5.setText("Image");
     jLabel5.setBounds(new Rectangle(193, 96, 51, 18));
-    //***************
+   
       ComboBoxModel model = new HeadPicCombobox(pics);
 
    ListCellRenderer renderer = new HeadpicCellRenderer();
@@ -140,7 +140,7 @@ System.out.print(no);
        
         if(str.equals("false")) JOptionPane.showMessageDialog(this,"Sorry:-(","ok",JOptionPane.INFORMATION_MESSAGE);
        else{
-       JOptionPane.showMessageDialog(this,"your javaicq#is"+no,"ok",JOptionPane.INFORMATION_MESSAGE);
+       JOptionPane.showMessageDialog(this,"your ID# is"+no,"ok",JOptionPane.INFORMATION_MESSAGE);
 
        this.dispose();
             MainWin f2=new MainWin(no,sername,serverport);
