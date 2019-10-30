@@ -21,7 +21,7 @@ public void run(){
        else if(str.equals("login")) {
           try{ Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");//Connect Database
          Connection c=DriverManager.getConnection("jdbc:odbc:javalan"," "," ");
-         String sql="select nickname,password from icq where lanid=?";                                                               
+         String sql="select nickname,password from lan where lanid=?";                                                               
                                                                       
   PreparedStatement prepare=c.prepareCall(sql);
           String lanid=in.readLine();
@@ -39,7 +39,7 @@ public void run(){
 { out.println("ok");
 
                       //*************register ipaddress
-                      String setip="update icq set ip=? where lanid=?";
+                      String setip="update lan set ip=? where lanid=?";
                       PreparedStatement prest=c.prepareCall(setip);
                       prest.clearParameters();
                       prest.setString(1,socket.getInetAddress().getHostAddress());
@@ -48,7 +48,7 @@ public void run(){
                       System.out.println(set);
                       //*************ipaddress
                       //set status online
-                      String status="update icq set status=1 where lanid=?";
+                      String status="update lan set status=1 where lanid=?";
                       PreparedStatement prest2=c.prepareCall(status);
                        prest2.clearParameters();
                        prest2.setInt(1,g);
@@ -69,7 +69,7 @@ public void run(){
 else  if(str.equals("new")){
    try{ Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
         Connection c2=DriverManager.getConnection("jdbc:odbc:javalan"," "," ");
-String newsql="insert into icq(nickname,password,email,info,place,pic) values(?,?,?,?,?,?)";
+String newsql="insert into lan(nickname,password,email,info,place,pic) values(?,?,?,?,?,?)";
 
        PreparedStatement prepare2=c2.prepareCall(newsql);
        String nickname=in.readLine().trim();
@@ -86,7 +86,7 @@ String newsql="insert into icq(nickname,password,email,info,place,pic) values(?,
        prepare2.setString(5,place);
        prepare2.setInt(6,picindex);
        int r3=prepare2.executeUpdate();
-String sql2="select lanid from icq where nickname=?";
+String sql2="select lanid from lan where nickname=?";
 
        PreparedStatement prepare3=c2.prepareCall(sql2);
         prepare3.clearParameters();
@@ -109,7 +109,7 @@ else if(str.equals("find")){
 try{ Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
         Connection c3=DriverManager.getConnection("jdbc:odbc:javalan"," "," ");
 
-     String find="select nickname,sex,place,ip,email,info from icq";
+     String find="select nickname,sex,place,ip,email,info from lan";
     Statement st=c3.createStatement();
     ResultSet result=st.executeQuery(find);
      while(result.next()){
@@ -124,7 +124,7 @@ try{ Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
 
      int d,x;
 boolean y;
-     ResultSet iset=st.executeQuery("select lanid,pic,status from icq");
+     ResultSet iset=st.executeQuery("select lanid,pic,status from lan");
      while(iset.next()){
      d=iset.getInt("lanid");
      out.println(d);
@@ -162,7 +162,7 @@ try{ Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
 
     out.println(friendno.size());
           for(int i=0;i<friendno.size();i++){
-         String friendinfo="select nickname,lanid,ip,status,pic,email,info from icq where lanid=?";
+         String friendinfo="select nickname,lanid,ip,status,pic,email,info from lan where lanid=?";
       PreparedStatement prepare5=c4.prepareCall(friendinfo);
       prepare5.clearParameters();
        prepare5.setObject(1,friendno.get(i));
@@ -235,7 +235,7 @@ System.out.println("add");
       if(r6==1) System.out.println("ok  addfrien");
       else  System.out.println("false addfriend");
 
-String friendinfo="select nickname,lanid,ip,status,pic,email,info from icq where lanid=?";
+String friendinfo="select nickname,lanid,ip,status,pic,email,info from lan where lanid=?";
 
       PreparedStatement prepare5=c6.prepareCall(friendinfo);
       prepare5.clearParameters();
@@ -290,7 +290,7 @@ try{ Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
 
          int mylanid=Integer.parseInt(in.readLine());
             System.out.println(mylanid);
-             String status="update icq set status=0 , ip=' ' where lanid=?";
+             String status="update lan set status=0 , ip=' ' where lanid=?";
                       PreparedStatement prest8=c8.prepareCall(status);
                        prest8.clearParameters();
                        prest8.setInt(1,mylanid);
@@ -320,7 +320,7 @@ System.out.println("getwhoaddme");
    }//end while
 
     for(int i=0;i<who.size();i++){
-     String whoinfo="select ip from icq where lanid=? and status=1";
+     String whoinfo="select ip from lan where lanid=? and status=1";
       PreparedStatement prepare=c9.prepareCall(whoinfo);
       prepare.clearParameters();
        prepare.setObject(1,who.get(i));
