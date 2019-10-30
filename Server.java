@@ -54,7 +54,7 @@ public void run(){
                        prest2.setInt(1,g);
                        int set2=prest2.executeUpdate();
                       System.out.println(set2);
-                      //set online
+                      
 }
 
                       else out.println("false");r.close();c.close();}
@@ -93,7 +93,6 @@ String sql2="select lanid from lan where nickname=?";
        prepare3.setString(1,nickname);
        ResultSet r2=prepare3.executeQuery();
      while(r2.next()){
-      //out.println(r2.getInt(1));
       no=r2.getInt(1);
       System.out.println(no);
      }
@@ -137,7 +136,7 @@ boolean y;
      }
     // end send jlanid
      iset.close();
-     /////////lanid end
+
       c3.close();result.close();
 }catch (Exception e){e.printStackTrace();System.out.println("false");}
 //socket.close();
