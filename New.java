@@ -15,7 +15,7 @@ private PrintWriter out;
   JPanel jPanel1 = new JPanel();
   JLabel jLabel1 = new JLabel();
   JLabel jLabel2 = new JLabel();
-  JTextField jicq = new JTextField();
+  JTextField jid = new JTextField();
   JLabel jLabel3 = new JLabel();
   JPasswordField password = new JPasswordField();
   JPanel jPanel2 = new JPanel();
@@ -47,7 +47,7 @@ private PrintWriter out;
     jLabel1.setBounds(new Rectangle(5, 7, 103, 18));
     jLabel2.setText("Your ID");
     jLabel2.setBounds(new Rectangle(7, 66, 58, 18));
-    jicq.setBounds(new Rectangle(68, 65, 97, 22));
+    jid.setBounds(new Rectangle(68, 65, 97, 22));
     jLabel3.setText("Password");
     jLabel3.setBounds(new Rectangle(173, 66, 67, 18));
     password.setBounds(new Rectangle(237, 63, 94, 22));
@@ -85,7 +85,7 @@ private PrintWriter out;
     contentPane.add(jPanel1, null);
     jPanel1.add(jLabel1, null);
     jPanel1.add(jLabel2, null);
-    jPanel1.add(jicq, null);
+    jPanel1.add(jid, null);
     jPanel1.add(jLabel3, null);
     jPanel1.add(password, null);
     contentPane.add(jPanel2, null);
@@ -117,7 +117,7 @@ private PrintWriter out;
       PrintWriter out=new PrintWriter(new BufferedWriter(
                               new OutputStreamWriter(socket.getOutputStream())),true);
 out.println("login");//
-out.println(jicq.getText());
+out.println(jid.getText());
 out.println(password.getPassword());
 
  String str=" ";
@@ -127,7 +127,7 @@ out.println(password.getPassword());
         if(str.equals("false")) JOptionPane.showMessageDialog(this,"Sorry:-(","ok",JOptionPane.INFORMATION_MESSAGE);
        else{
        this.dispose();
-          int g=Integer.parseInt(jicq.getText());
+          int g=Integer.parseInt(jid.getText());
             MainWin f2=new MainWin(g,server,serport);
             f2.setVisible(true);
                }
