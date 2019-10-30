@@ -20,13 +20,13 @@ public void run(){
                     if(str.equals("end"))break;//
        else if(str.equals("login")) {
           try{ Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");//Connect Database
-         Connection c=DriverManager.getConnection("jdbc:odbc:javaicq"," "," ");
-         String sql="select nickname,password from icq where icqno=?";                                                               
+         Connection c=DriverManager.getConnection("jdbc:odbc:javalan"," "," ");
+         String sql="select nickname,password from icq where lanid=?";                                                               
                                                                       
   PreparedStatement prepare=c.prepareCall(sql);
-          String icqno=in.readLine();
-                int g=Integer.parseInt(icqno);
-                 System.out.println(icqno);
+          String lanid=in.readLine();
+                int g=Integer.parseInt(lanid);
+                 System.out.println(lanid);
                  String passwd=in.readLine().trim();
                  System.out.println(passwd);
                  prepare.clearParameters();
@@ -39,7 +39,7 @@ public void run(){
 { out.println("ok");
 
                       //*************register ipaddress
-                      String setip="update icq set ip=? where icqno=?";
+                      String setip="update icq set ip=? where lanid=?";
                       PreparedStatement prest=c.prepareCall(setip);
                       prest.clearParameters();
                       prest.setString(1,socket.getInetAddress().getHostAddress());
@@ -48,7 +48,7 @@ public void run(){
                       System.out.println(set);
                       //*************ipaddress
                       //set status online
-                      String status="update icq set status=1 where icqno=?";
+                      String status="update icq set status=1 where lanid=?";
                       PreparedStatement prest2=c.prepareCall(status);
                        prest2.clearParameters();
                        prest2.setInt(1,g);
@@ -68,7 +68,7 @@ public void run(){
  
 else  if(str.equals("new")){
    try{ Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-        Connection c2=DriverManager.getConnection("jdbc:odbc:javaicq"," "," ");
+        Connection c2=DriverManager.getConnection("jdbc:odbc:javalan"," "," ");
 String newsql="insert into icq(nickname,password,email,info,place,pic) values(?,?,?,?,?,?)";
 
        PreparedStatement prepare2=c2.prepareCall(newsql);
@@ -86,7 +86,7 @@ String newsql="insert into icq(nickname,password,email,info,place,pic) values(?,
        prepare2.setString(5,place);
        prepare2.setInt(6,picindex);
        int r3=prepare2.executeUpdate();
-String sql2="select icqno from icq where nickname=?";
+String sql2="select lanid from icq where nickname=?";
 
        PreparedStatement prepare3=c2.prepareCall(sql2);
         prepare3.clearParameters();
@@ -107,7 +107,7 @@ c2.close();
 
 else if(str.equals("find")){
 try{ Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-        Connection c3=DriverManager.getConnection("jdbc:odbc:javaicq"," "," ");
+        Connection c3=DriverManager.getConnection("jdbc:odbc:javalan"," "," ");
 
      String find="select nickname,sex,place,ip,email,info from icq";
     Statement st=c3.createStatement();
@@ -124,9 +124,9 @@ try{ Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
 
      int d,x;
 boolean y;
-     ResultSet iset=st.executeQuery("select icqno,pic,status from icq");
+     ResultSet iset=st.executeQuery("select lanid,pic,status from icq");
      while(iset.next()){
-     d=iset.getInt("icqno");
+     d=iset.getInt("lanid");
      out.println(d);
      x=iset.getInt("pic");//pic info
      out.println(x);
@@ -135,9 +135,9 @@ boolean y;
            else {out.println("0");}
       //System.out.println(d);
      }
-    // end send jicqno
+    // end send jlanid
      iset.close();
-     /////////icqno end
+     /////////lanid end
       c3.close();result.close();
 }catch (Exception e){e.printStackTrace();System.out.println("false");}
 //socket.close();
@@ -145,14 +145,14 @@ boolean y;
 
 else if(str.equals("friend")){
 try{ Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-        Connection c4=DriverManager.getConnection("jdbc:odbc:javaicq"," "," ");
+        Connection c4=DriverManager.getConnection("jdbc:odbc:javalan"," "," ");
 
-     String friend="select friend from friend where icqno=?";
+     String friend="select friend from friend where lanid=?";
      PreparedStatement prepare4=c4.prepareCall(friend);
         prepare4.clearParameters();
-         int icqno=Integer.parseInt(in.readLine());
-         System.out.println(icqno);
-         prepare4.setInt(1,icqno);
+         int lanid=Integer.parseInt(in.readLine());
+         System.out.println(lanid);
+         prepare4.setInt(1,lanid);
        ResultSet r4=prepare4.executeQuery();
        Vector friendno=new Vector();
         while(r4.next()){
@@ -162,7 +162,7 @@ try{ Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
 
     out.println(friendno.size());
           for(int i=0;i<friendno.size();i++){
-         String friendinfo="select nickname,icqno,ip,status,pic,email,info from icq where icqno=?";
+         String friendinfo="select nickname,lanid,ip,status,pic,email,info from icq where lanid=?";
       PreparedStatement prepare5=c4.prepareCall(friendinfo);
       prepare5.clearParameters();
        prepare5.setObject(1,friendno.get(i));
@@ -170,7 +170,7 @@ try{ Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
       boolean status;
          while(r5.next()){
        out.println(r5.getString("nickname"));
-           out.println(r5.getInt("icqno"));
+           out.println(r5.getInt("lanid"));
            out.println(r5.getString("ip"));
          status=r5.getBoolean("status");
          if (status)out.println("1");
@@ -192,17 +192,17 @@ try{ Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
  else if(str.equals("addfriend")){
 System.out.println("add");
  try{ Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-        Connection c6=DriverManager.getConnection("jdbc:odbc:javaicq"," "," ");
+        Connection c6=DriverManager.getConnection("jdbc:odbc:javalan"," "," ");
 
-        int friendicqno=Integer.parseInt(in.readLine());
-          System.out.println(friendicqno);
-         int myicqno=Integer.parseInt(in.readLine());
-            System.out.println(myicqno);
+        int friendlanid=Integer.parseInt(in.readLine());
+          System.out.println(friendlanid);
+         int mylanid=Integer.parseInt(in.readLine());
+            System.out.println(mylanid);
             String addfriend="insert into friend values(?,?)";
              PreparedStatement prepare6=c6.prepareCall(addfriend);
       prepare6.clearParameters();
-       prepare6.setInt(1,myicqno);
-       prepare6.setInt(2,friendicqno);
+       prepare6.setInt(1,mylanid);
+       prepare6.setInt(2,friendlanid);
        int  r6=0;
       r6=prepare6.executeUpdate();
       if(r6==1) System.out.println("ok  addfrien");
@@ -219,33 +219,33 @@ System.out.println("over addfriend");
  else if(str.equals("addnewfriend")){
 System.out.println("add");
  try{ Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-        Connection c6=DriverManager.getConnection("jdbc:odbc:javaicq"," "," ");
+        Connection c6=DriverManager.getConnection("jdbc:odbc:javalan"," "," ");
 
-        int friendicqno=Integer.parseInt(in.readLine());
-          System.out.println(friendicqno);
-         int myicqno=Integer.parseInt(in.readLine());
-            System.out.println(myicqno);
+        int friendlanid=Integer.parseInt(in.readLine());
+          System.out.println(friendlanid);
+         int mylanid=Integer.parseInt(in.readLine());
+            System.out.println(mylanid);
             String addfriend="insert into friend values(?,?)";
              PreparedStatement prepare6=c6.prepareCall(addfriend);
       prepare6.clearParameters();
-       prepare6.setInt(1,myicqno);
-       prepare6.setInt(2,friendicqno);
+       prepare6.setInt(1,mylanid);
+       prepare6.setInt(2,friendlanid);
        int  r6=0;
       r6=prepare6.executeUpdate();
       if(r6==1) System.out.println("ok  addfrien");
       else  System.out.println("false addfriend");
 
-String friendinfo="select nickname,icqno,ip,status,pic,email,info from icq where icqno=?";
+String friendinfo="select nickname,lanid,ip,status,pic,email,info from icq where lanid=?";
 
       PreparedStatement prepare5=c6.prepareCall(friendinfo);
       prepare5.clearParameters();
-       prepare5.setInt(1,friendicqno);
+       prepare5.setInt(1,friendlanid);
       ResultSet r5=prepare5.executeQuery();
       boolean status;
          while(r5.next()){
          System.out.println("dsf");
        out.println(r5.getString("nickname"));
-           out.println(r5.getInt("icqno"));
+           out.println(r5.getInt("lanid"));
            out.println(r5.getString("ip"));
          status=r5.getBoolean("status");
          if (status)out.println("1");
@@ -266,17 +266,17 @@ System.out.println("over addnewfriend");
 else if(str.equals("delfriend")){
 System.out.println("del");
 try{ Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-        Connection c7=DriverManager.getConnection("jdbc:odbc:javaicq"," "," ");
+        Connection c7=DriverManager.getConnection("jdbc:odbc:javalan"," "," ");
 
-        int friendicqno=Integer.parseInt(in.readLine());
-          System.out.println(friendicqno);
-         int myicqno=Integer.parseInt(in.readLine());
-            System.out.println(myicqno);
-            String addfriend="delete from friend where icqno=? and friend=?";
+        int friendlanid=Integer.parseInt(in.readLine());
+          System.out.println(friendlanid);
+         int mylanid=Integer.parseInt(in.readLine());
+            System.out.println(mylanid);
+            String addfriend="delete from friend where lanid=? and friend=?";
              PreparedStatement prepare7=c7.prepareCall(addfriend);
       prepare7.clearParameters();
-       prepare7.setInt(1,myicqno);
-       prepare7.setInt(2,friendicqno);
+       prepare7.setInt(1,mylanid);
+       prepare7.setInt(2,friendlanid);
        int  r7=0;
       r7=prepare7.executeUpdate();
       if(r7==1) System.out.println("ok  delfrien");
@@ -286,14 +286,14 @@ try{ Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
 
 else if(str.equals("logout")){
 try{ Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-        Connection c8=DriverManager.getConnection("jdbc:odbc:javaicq"," "," ");
+        Connection c8=DriverManager.getConnection("jdbc:odbc:javalan"," "," ");
 
-         int myicqno=Integer.parseInt(in.readLine());
-            System.out.println(myicqno);
-             String status="update icq set status=0 , ip=' ' where icqno=?";
+         int mylanid=Integer.parseInt(in.readLine());
+            System.out.println(mylanid);
+             String status="update icq set status=0 , ip=' ' where lanid=?";
                       PreparedStatement prest8=c8.prepareCall(status);
                        prest8.clearParameters();
-                       prest8.setInt(1,myicqno);
+                       prest8.setInt(1,mylanid);
                    int r8=prest8.executeUpdate();
                      if(r8==1) System.out.println("ok  logout");
       else  System.out.println("false logout");
@@ -305,14 +305,14 @@ try{ Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
 else if(str.equals("getwhoaddme")){
 System.out.println("getwhoaddme");
  try{ Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-        Connection c9=DriverManager.getConnection("jdbc:odbc:javaicq"," "," ");
+        Connection c9=DriverManager.getConnection("jdbc:odbc:javalan"," "," ");
 
-        int myicqno=Integer.parseInt(in.readLine());
-            System.out.println(myicqno);
-            String getwhoaddme="select icqno from friend where friend=?";
+        int mylanid=Integer.parseInt(in.readLine());
+            System.out.println(mylanid);
+            String getwhoaddme="select lanid from friend where friend=?";
              PreparedStatement prepare6=c9.prepareCall(getwhoaddme);
       prepare6.clearParameters();
-       prepare6.setInt(1,myicqno);
+       prepare6.setInt(1,mylanid);
       ResultSet r6=prepare6.executeQuery();
     Vector who=new Vector();
         while(r6.next()){
@@ -320,7 +320,7 @@ System.out.println("getwhoaddme");
    }//end while
 
     for(int i=0;i<who.size();i++){
-     String whoinfo="select ip from icq where icqno=? and status=1";
+     String whoinfo="select ip from icq where lanid=? and status=1";
       PreparedStatement prepare=c9.prepareCall(whoinfo);
       prepare.clearParameters();
        prepare.setObject(1,who.get(i));
