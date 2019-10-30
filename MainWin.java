@@ -16,15 +16,15 @@ import java.io.*;
  Vector nickname=new Vector();
  Vector sex=new Vector();
  Vector place=new Vector();
- Vector jicq=new Vector();
+ Vector jid=new Vector();
  Vector ip=new Vector();
  Vector pic=new Vector();
  Vector status=new Vector();
  Vector emails=new Vector();
  Vector infos=new Vector();
 //Temp info
- Vector tmpjicq=new Vector();//jicqid
- Vector tmpname=new Vector();//jicqname
+ Vector tmpjid=new Vector();//jidid
+ Vector tmpname=new Vector();//jidname
  Vector tmpip=new Vector();//ip
  Vector tmppic=new Vector();//pic info
  Vector tmpstatus=new Vector();//status
@@ -138,11 +138,11 @@ do{  s=in.readLine();
 }while(!s.equals("over"));
 //end  find  info
 
-int theirjicq,picinfo,sta;
+int theirjid,picinfo,sta;
 for(int x=0;x<nickname.size();x++){
-theirjicq=Integer.parseInt(in.readLine());
+theirjid=Integer.parseInt(in.readLine());
 
-jicq.add(new Integer(theirjicq));
+jid.add(new Integer(theirjid));
 picinfo=Integer.parseInt(in.readLine());
 pic.add(new Integer(picinfo));
 sta=Integer.parseInt(in.readLine());
@@ -168,7 +168,7 @@ findmenu.show(this,e.getX()+20,e.getY()+50);
 //add friend to database
 int dd;
 dd=list2.getSelectedIndex();
-tmpjicq.add(jicq.get(dd));
+tmpjid.add(jid.get(dd));
 tmpname.add(nickname.get(dd));
 tmpip.add(ip.get(dd));
 tmppic.add(pic.get(dd));
@@ -177,7 +177,7 @@ tmpemail.add(emails.get(dd));
 tmpinfo.add(infos.get(dd));
 //Send request to server to add friends
 out.println("addfriend");
-out.println(jicq.get(dd));
+out.println(jid.get(dd));
 out.println(myid);
  try{ //Tell the clients about the request
        String whoips;
@@ -248,7 +248,7 @@ int friendnum;//friend number
       "1.jpg","3.jpg","5.jpg","7.jpg"};
   private String [] picsoffline=new String[]{
    "2.jpg","4.jpg", "6.jpg","8.jpg"};
-  Vector friendjicq=new Vector();
+  Vector friendjid=new Vector();
   Vector udpport=new Vector();
   Vector friendips=new Vector();
   Vector friendemail=new Vector();
@@ -258,7 +258,7 @@ int friendnum;//friend number
  // Vector pic=new Vector();
 //Temp Info
   Vector tempname=new Vector();
-  Vector tempjicq=new Vector();
+  Vector tempjid=new Vector();
   Vector tempip=new Vector();
   Vector temppic=new Vector();
   Vector tempstatus=new Vector();
@@ -274,7 +274,7 @@ FindFriend2 findf;
 JDialog hello=new JDialog();
 JDialog OneAddyou=new JDialog();
 JDialog DirectAdd=new JDialog();
-int tempgetjicq;//get the tempgetjicq
+int tempgetjid;//get the tempgetjid
 //friend info
 //Program Interface Variable
   ImageIcon icon1=new ImageIcon("cab_small.gif");
@@ -315,12 +315,12 @@ int tempgetjicq;//get the tempgetjicq
   int serverport;
    byte array[]=new byte[512];
   Thread thread;
-  int myjicq;
+  int myjid;
   String received;
   JLabel jLabel3 = new JLabel();
   JTextField getfromname = new JTextField();
   JLabel jLabel4 = new JLabel();
-  JTextField getfromjicq = new JTextField();
+  JTextField getfromjid = new JTextField();
   JTextArea getinfo = new JTextArea();
   JButton getok = new JButton();
   String theip;
@@ -331,7 +331,7 @@ int tempgetjicq;//get the tempgetjicq
   JLabel jLabel1 = new JLabel();
   JTextField helloname = new JTextField();
   JLabel jLabel5 = new JLabel();
-  JTextField hellojicq = new JTextField();
+  JTextField hellojid = new JTextField();
   JLabel jLabel6 = new JLabel();
   JTextField helloemail = new JTextField();
   JLabel jLabel7 = new JLabel();
@@ -365,12 +365,12 @@ int tempgetjicq;//get the tempgetjicq
         friendnum=Integer.parseInt(in.readLine());
          String friendname=" ";
 
-        String friendjicqno,friendip,friendstatus,picinfo,email,infos;
+        String friendjidno,friendip,friendstatus,picinfo,email,infos;
         do{friendname=in.readLine();
             if(friendname.equals("over"))  break;
             friendnames.add(friendname);
-            friendjicqno=in.readLine();
-            friendjicq.add(new Integer(friendjicqno));
+            friendjidno=in.readLine();
+            friendjid.add(new Integer(friendjidno));
             friendip=in.readLine();
             friendips.add(friendip);
           friendstatus=in.readLine();
@@ -416,13 +416,13 @@ receivePacket=new DatagramPacket(array,array.length);
     if(received.substring(0,6).equals("online")){
            tempstr=received.substring(6).trim();
            // System.out.println("str"+tempstr);
-           tempgetjicq=Integer.parseInt(tempstr);
-         // System.out.println("id"+tempgetjicq);
-          do{  tx= Integer.parseInt(friendjicq.get(index3).toString());
+           tempgetjid=Integer.parseInt(tempstr);
+         // System.out.println("id"+tempgetjid);
+          do{  tx= Integer.parseInt(friendjid.get(index3).toString());
           //System.out.println("tx"+tx);
-          if(tempgetjicq==tx)break;
+          if(tempgetjid==tx)break;
           index3++;
-          }while(index3<friendjicq.size());
+          }while(index3<friendjid.size());
           friendips.setElementAt(infofromip,index3);
          // status.setElementAt(,index3);
         //System.out.println(index3);
@@ -434,13 +434,13 @@ receivePacket=new DatagramPacket(array,array.length);
       else  if(received.substring(0,7).equals("offline")){
       tempstr=received.substring(7).trim();
             System.out.println("str"+tempstr);
-           tempgetjicq=Integer.parseInt(tempstr);
-          System.out.println("id"+tempgetjicq);
-          do{  tx= Integer.parseInt(friendjicq.get(index3).toString());
+           tempgetjid=Integer.parseInt(tempstr);
+          System.out.println("id"+tempgetjid);
+          do{  tx= Integer.parseInt(friendjid.get(index3).toString());
           System.out.println("tx"+tx);
-          if(tempgetjicq==tx)break;
+          if(tempgetjid==tx)break;
           index3++;
-          }while(index3<friendjicq.size());
+          }while(index3<friendjid.size());
           infofromip="null";
           friendips.setElementAt(infofromip,index3);
          // status.setElementAt(,index3);
@@ -455,10 +455,10 @@ receivePacket=new DatagramPacket(array,array.length);
               
       tempstr=received.substring(9).trim();
             System.out.println("str"+tempstr);
-           tempgetjicq=Integer.parseInt(tempstr);
-          System.out.println("id"+tempgetjicq);
+           tempgetjid=Integer.parseInt(tempstr);
+          System.out.println("id"+tempgetjid);
   
-    oneaddme.setText(tempgetjicq+"Add friend");
+    oneaddme.setText(tempgetjid+"Add friend");
     OneAddyou.setBounds(400,300,250,200);
      OneAddyou.show();
 
@@ -501,13 +501,13 @@ try{sendSocket=new DatagramSocket();
   public MainWin(int s,String sername,int serport) {
     enableEvents(AWTEvent.WINDOW_EVENT_MASK);
     try {
-       myjicq=s;
+       myjid=s;
        server=sername;
        serverport=serport;
       jbInit();
-      ConnectServer(myjicq);
+      ConnectServer(myjid);
        CreatUDP();
-         findf=new FindFriend2(myjicq,server,serverport);
+         findf=new FindFriend2(myjid,server,serverport);
 findf.setBounds(200,150,300,300);
          thread=new Thread(this);
          thread.start();
@@ -628,9 +628,9 @@ findf.setBounds(200,150,300,300);
     jLabel3.setText("Name");
     jLabel3.setBounds(new Rectangle(14, 37, 41, 18));
     getfromname.setBounds(new Rectangle(56, 37, 90, 22));
-    jLabel4.setText("JiCQ");
+    jLabel4.setText("jid");
     jLabel4.setBounds(new Rectangle(164, 39, 41, 18));
-    getfromjicq.setBounds(new Rectangle(224, 37, 104, 22));
+    getfromjid.setBounds(new Rectangle(224, 37, 104, 22));
     getinfo.setBounds(new Rectangle(18, 68, 325, 153));
     getok.setText("ok");
     getok.setBounds(new Rectangle(136, 240, 79, 29));
@@ -669,9 +669,9 @@ findf.setBounds(200,150,300,300);
     jLabel1.setText("Name");
     jLabel1.setBounds(new Rectangle(11, 29, 41, 18));
     helloname.setBounds(new Rectangle(52, 27, 78, 22));
-    jLabel5.setText("Jicq#");
+    jLabel5.setText("jid#");
     jLabel5.setBounds(new Rectangle(148, 30, 41, 18));
-    hellojicq.setBounds(new Rectangle(198, 28, 106, 22));
+    hellojid.setBounds(new Rectangle(198, 28, 106, 22));
     jLabel6.setText("Email");
     jLabel6.setBounds(new Rectangle(11, 71, 66, 18));
     helloemail.setBounds(new Rectangle(64, 69, 138, 22));
@@ -756,12 +756,12 @@ contentPane.add(jButton1, null);
     getdata.getContentPane().add(jLabel3, null);
     getdata.getContentPane().add(getfromname, null);
     getdata.getContentPane().add(jLabel4, null);
-    getdata.getContentPane().add(getfromjicq, null);
+    getdata.getContentPane().add(getfromjid, null);
     getdata.getContentPane().add(jLabel9, null);
     hello.getContentPane().add(jLabel1, null);
     hello.getContentPane().add(helloname, null);
     hello.getContentPane().add(jLabel5, null);
-    hello.getContentPane().add(hellojicq, null);
+    hello.getContentPane().add(hellojid, null);
     hello.getContentPane().add(jLabel6, null);
     hello.getContentPane().add(helloemail, null);
     hello.getContentPane().add(jLabel7, null);
@@ -786,7 +786,7 @@ contentPane.add(jButton1, null);
      //tell who add me as friend offline
      try{
        String whoips;
-       String  s="offline"+myjicq;
+       String  s="offline"+myjid;
        s.trim();
        System.out.println(s);
       byte[] data=s.getBytes();
@@ -802,7 +802,7 @@ for(int i=0;i<whoaddmesip.size();i++){
 
 
      out.println("logout");
-     out.println(myjicq);
+     out.println(myjid);
      //socket.close();
       System.exit(0);
 
@@ -840,7 +840,7 @@ senddata.setBounds(e.getX()+50,e.getY()+50,400,280);
 index=list.getSelectedIndex();
 System.out.println(index);
 nametext.setText(friendnames.get(index).toString());
-icqno.setText(friendjicq.get(index).toString());
+icqno.setText(friendjid.get(index).toString());
  theip=friendips.get(index).toString();//ip address
 System.out.println(theip);
   senddata.show();
@@ -880,7 +880,7 @@ String message=received.trim();
 if(index==index4)getinfo.append(message);
 else getinfo.append(" ");
 getfromname.setText(friendnames.get(index).toString().trim());
-getfromjicq.setText(friendjicq.get(index).toString().trim());
+getfromjid.setText(friendjid.get(index).toString().trim());
 getdata.show();
   }
 
@@ -892,7 +892,7 @@ received=" ";
 //update friend info;
   void update_mouseClicked(MouseEvent e) {
 tempname=findf.tmpname;
-tempjicq=findf.tmpjicq;
+tempjid=findf.tmpjid;
 tempip=findf.tmpip;
 temppic=findf.tmppic;
 tempstatus=findf.tmpstatus;
@@ -913,7 +913,7 @@ else {
 //add to friendlist
 for(int k=0;k<tempname.size();k++){
 friendnames.add(tempname.get(k));
-friendjicq.add(tempjicq.get(k));
+friendjid.add(tempjid.get(k));
 friendips.add(tempip.get(k));
 picno.add(temppic.get(k));
 status.add(tempstatus.get(k));
@@ -923,7 +923,7 @@ friendinfo.add(tempinfo.get(k));
 //clean tmp
 for(int p=0;p<tempname.size();p++){
 findf.tmpip.removeAllElements();
-findf.tmpjicq.removeAllElements();
+findf.tmpjid.removeAllElements();
 findf.tmpname.removeAllElements();
 findf.tmppic.removeAllElements();
 findf.tmpstatus.removeAllElements();
@@ -937,13 +937,13 @@ out.println("delfriend");
  int index2;
   index2=list.getSelectedIndex();
 
-out.println(friendjicq.get(index2));//the friendjicq to del
-out.println(myjicq);//my jicqno
+out.println(friendjid.get(index2));//the friendjid to del
+out.println(myjid);//my jidno
  DefaultListModel mm=(DefaultListModel)list.getModel();
   mm.removeElementAt(index2);
 friendnames.removeElementAt(index2);
   friendips.removeElementAt(index2);
-  friendjicq.removeElementAt(index2);
+  friendjid.removeElementAt(index2);
   picno.removeElementAt(index2);
   status.removeElementAt(index2);
   friendemail.removeElementAt(index2);
@@ -952,7 +952,7 @@ friendnames.removeElementAt(index2);
 //tell friend i am online
   void online_mouseClicked(MouseEvent e) {
 out.println("getwhoaddme");
-out.println(myjicq);
+out.println(myjid);
 
    String whoip=" ";
    do{
@@ -966,7 +966,7 @@ for(int i=0;i<whoaddmesip.size();i++)
 }
  try{
        String whoips;
-       String  s="online"+myjicq;
+       String  s="online"+myjid;
        s.trim();
        System.out.println(s);
       byte[] data=s.getBytes();
@@ -995,7 +995,7 @@ hello.setLocationRelativeTo(MainWin.this);
 hello.setBounds(e.getX()+50,e.getY()+50,380,300);
   index=list.getSelectedIndex();
 helloname.setText(friendnames.get(index).toString());
-hellojicq.setText(friendjicq.get(index).toString());
+hellojid.setText(friendjid.get(index).toString());
 helloemail.setText(friendemail.get(index).toString());
 helloinfo.setText(friendinfo.get(index).toString().trim());
 hello.show();
@@ -1008,16 +1008,16 @@ hello.dispose();
   void addit_mouseClicked(MouseEvent e) {
 
  out.println("addnewfriend");
-out.println(tempgetjicq);
-out.println(myjicq);
+out.println(tempgetjid);
+out.println(myjid);
  String thename=" ";
 try{
-        String thejicqno,theip,thestatus,picinfo,email,infos;
+        String thejidno,theip,thestatus,picinfo,email,infos;
         do{thename=in.readLine();
             if(thename.equals("over"))  break;
             friendnames.add(thename);
-           thejicqno=in.readLine();
-            friendjicq.add(new Integer(thejicqno));
+           thejidno=in.readLine();
+            friendjid.add(new Integer(thejidno));
            theip=in.readLine();
             friendips.add(theip);
          thestatus=in.readLine();
@@ -1044,15 +1044,15 @@ OneAddyou.dispose();
   void directaddok_mouseClicked(MouseEvent e) {
  out.println("addnewfriend");
 out.println(friendid.getText().trim());
-out.println(myjicq);
+out.println(myjid);
  String thename=" ";
 try{
-        String thejicqno,theip,thestatus,picinfo,email,infos;
+        String thejidno,theip,thestatus,picinfo,email,infos;
         do{thename=in.readLine();
             if(thename.equals("over"))  break;
             friendnames.add(thename);
-           thejicqno=in.readLine();
-            friendjicq.add(new Integer(thejicqno));
+           thejidno=in.readLine();
+            friendjid.add(new Integer(thejidno));
            theip=in.readLine();
             friendips.add(theip);
          thestatus=in.readLine();
@@ -1166,4 +1166,3 @@ class MainWin_cancel_mouseAdapter extends java.awt.event.MouseAdapter {
     adaptee.cancel_mouseClicked(e);
   }
 }
-
