@@ -16,8 +16,8 @@ public ServerThread(Socket s) throws IOException {
 
 public void run(){
  try{ while(true){
-                    String str=in.readLine();//
-                    if(str.equals("end"))break;//
+                    String str=in.readLine();
+                    if(str.equals("end"))break;
        else if(str.equals("login")) {
           try{ Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");//Connect Database
          Connection c=DriverManager.getConnection("jdbc:odbc:javalan"," "," ");
@@ -38,7 +38,7 @@ public void run(){
                      if(passwd.regionMatches(0,pass,0,pass.length()))
 { out.println("ok");
 
-                      //*************register ipaddress
+                      //register ipaddress
                       String setip="update lan set ip=? where lanid=?";
                       PreparedStatement prest=c.prepareCall(setip);
                       prest.clearParameters();
@@ -46,7 +46,7 @@ public void run(){
                       prest.setInt(2,g);
                       int set=prest.executeUpdate();
                       System.out.println(set);
-                      //*************ipaddress
+  
                       //set status online
                       String status="update lan set status=1 where lanid=?";
                       PreparedStatement prest2=c.prepareCall(status);
@@ -132,14 +132,14 @@ boolean y;
      y=iset.getBoolean("status");
       if (y){out.println("1");}
            else {out.println("0");}
-      //System.out.println(d);
+
      }
-    // end send jlanid
+
      iset.close();
 
       c3.close();result.close();
 }catch (Exception e){e.printStackTrace();System.out.println("false");}
-//socket.close();
+
 }//end find
 
 else if(str.equals("friend")){
@@ -177,7 +177,7 @@ try{ Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
         out.println(r5.getInt("pic"));
         out.println(r5.getString("email"));
         out.println(r5.getString("info"));
-     } //while
+     } 
      r5.close();
 }
 
@@ -185,7 +185,7 @@ try{ Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
      System.out.println("over");
       c4.close();r4.close();
 }catch (Exception e){e.printStackTrace();System.out.println("false");}
-//socket.close();
+
 }//end friend
 
  else if(str.equals("addfriend")){
@@ -209,7 +209,7 @@ System.out.println("add");
 
 }catch (Exception e){e.printStackTrace();System.out.println("false");}
 
-//socket.close();
+
 System.out.println("over addfriend");
 }//end addfriend
 
@@ -326,14 +326,14 @@ System.out.println("getwhoaddme");
       ResultSet r=prepare.executeQuery();
        while(r.next()){
          out.println(r.getString("ip"));
-            } //while
+            } 
            r.close();
-         }//for
+         }
      out.println("over");
      System.out.println("over");
       c9.close();r6.close();
 }catch (Exception e){e.printStackTrace();System.out.println("false");}
-}//end get who add me as friend
+}
 
    System.out.println("Echo ing :"+str);
     }  System.out.println("Close...");
