@@ -191,12 +191,11 @@ out.println(myid);
              sendSocket.send(sendPacket);
 
           } catch(IOException e2){e2.printStackTrace();}
-//}catch(IOException df){};
+
 
   }
-//add friend end
 }
-//
+
 class FindListModel extends DefaultListModel
       {   public FindListModel(Vector nickname,Vector sex,Vector place)
           { for(int i=0;i<nickname.size();++i){
@@ -255,7 +254,7 @@ int friendnum;//friend number
   Vector friendinfo=new Vector();
   Vector picno=new Vector();
   Vector status=new Vector();
- // Vector pic=new Vector();
+
 //Temp Info
   Vector tempname=new Vector();
   Vector tempjid=new Vector();
@@ -302,15 +301,15 @@ int tempgetjid;//get the tempgetjid
   JLabel jLabel2 = new JLabel();
   JButton find = new JButton();
   FlowLayout flowLayout1 = new FlowLayout();
- //*************net
+
 //Network Variable
   Socket socket;
   BufferedReader in;
    PrintWriter out;
   DatagramPacket sendPacket,receivePacket;
   DatagramSocket sendSocket,receiveSocket;
-  int udpPORT=5001;//
-  int sendPort=5000;//Debug
+  int udpPORT=5001;
+  int sendPort=5000;
   String server;
   int serverport;
    byte array[]=new byte[512];
@@ -348,7 +347,7 @@ int tempgetjid;//get the tempgetjid
   JLabel jLabel12 = new JLabel();
   JTextField friendid = new JTextField();
   JButton directaddok = new JButton();
-//***************net
+
 
 
   public void  ConnectServer(int myid){
@@ -392,9 +391,9 @@ if(status.get(p).equals("1")){
      mm.addElement(new Object[]{friendnames.get(p),new ImageIcon(picsonline[picid])});}
 else {
  mm.addElement(new Object[]{friendnames.get(p),new ImageIcon(picsoffline[picid])});}
-     }//for
+     }
  }//connectto server
-//*****************************
+
 //Monitor
 public  void  run(){
 
@@ -409,27 +408,22 @@ receivePacket=new DatagramPacket(array,array.length);
            index3=0;
               received=new String(data,0,data.length);
                received.trim();
-            //  System.out.println("get"+received.substring(0,6));
+  
                  String tempstr;
              int tx;
            //friend online
     if(received.substring(0,6).equals("online")){
-           tempstr=received.substring(6).trim();
-           // System.out.println("str"+tempstr);
+           tempstr=received.substring(6).trim();   
            tempgetjid=Integer.parseInt(tempstr);
-         // System.out.println("id"+tempgetjid);
           do{  tx= Integer.parseInt(friendjid.get(index3).toString());
-          //System.out.println("tx"+tx);
           if(tempgetjid==tx)break;
           index3++;
           }while(index3<friendjid.size());
           friendips.setElementAt(infofromip,index3);
-         // status.setElementAt(,index3);
-        //System.out.println(index3);
           DefaultListModel mm3=(DefaultListModel)list.getModel();
           int  picid=Integer.parseInt(picno.get(index3).toString());
                mm3.setElementAt(new Object[]{friendnames.get(index3),new ImageIcon(picsonline[picid])},index3);
-              }//end online
+              }
     //friend offline
       else  if(received.substring(0,7).equals("offline")){
       tempstr=received.substring(7).trim();
@@ -443,13 +437,12 @@ receivePacket=new DatagramPacket(array,array.length);
           }while(index3<friendjid.size());
           infofromip="null";
           friendips.setElementAt(infofromip,index3);
-         // status.setElementAt(,index3);
         System.out.println(index3);
           DefaultListModel mm3=(DefaultListModel)list.getModel();
           int  picid=Integer.parseInt(picno.get(index3).toString());
                mm3.setElementAt(new Object[]{friendnames.get(index3),new ImageIcon(picsoffline[picid])},index3);
 
-      }//end friend offline
+      }
       //someone add me as friend
       else if(received.substring(0,9).equals("oneaddyou")){
               
@@ -466,20 +459,19 @@ receivePacket=new DatagramPacket(array,array.length);
       } //endsomeone add me as friend
   else{
         index4=0;
-        //  String infofromip=receivePacket.getAddress().getHostAddress().toString().trim();
          do{
             String friendip=friendips.get(index4).toString().trim();
             if (infofromip.equals(friendip)){
               String nameinfo=friendnames.get(index4).toString().trim();
    JOptionPane.showMessageDialog(this,"Get"+nameinfo+"...","ok",JOptionPane.INFORMATION_MESSAGE);
                 fromunknow=false;
-                break;   }//if
+                break;   }
                index4++;
                if(index4>=friendnames.size()){
                fromunknow=true;
                 JOptionPane.showMessageDialog(this,"Unknown"+infofromip+"...","ok",JOptionPane.INFORMATION_MESSAGE);
                }
-              }while(index4<friendnames.size());//while
+              }while(index4<friendnames.size());
                System.out.println(index4);
 
        };
@@ -488,16 +480,13 @@ receivePacket=new DatagramPacket(array,array.length);
 }
 
 
-}//run end
-//**********************
+
 
 public void CreatUDP(){
 try{sendSocket=new DatagramSocket();
     receiveSocket=new DatagramSocket(udpPORT);
-   // System.out.println("udp ok");
 }catch(SocketException se){se.printStackTrace();System.out.println("false udp");}
-}// creat udp end
-//main ****************
+}
   public MainWin(int s,String sername,int serport) {
     enableEvents(AWTEvent.WINDOW_EVENT_MASK);
     try {
@@ -516,7 +505,7 @@ findf.setBounds(200,150,300,300);
     catch(Exception e) {
       e.printStackTrace();
     }
-  }//end main*****
+  }
   /**Component initialization*/
   private void jbInit() throws Exception  {
     contentPane = (JPanel) this.getContentPane();
@@ -583,7 +572,6 @@ findf.setBounds(200,150,300,300);
      Container senddiapane=senddata.getContentPane();
     dialogcon.setLayout(null);
     dialogcon.setSize(100,100);
-    //senddiapane.setLayout(null);
     name.setForeground(SystemColor.activeCaption);
     name.setText("Name");
     name.setBounds(new Rectangle(9, 44, 41, 18));
@@ -615,7 +603,6 @@ findf.setBounds(200,150,300,300);
     sendtext.setBounds(new Rectangle(7, 71, 384, 141));
     jLabel2.setText("This is HG");
     jLabel2.setBounds(new Rectangle(20, 82, 89, 18));
-    //senddiapane.setBackground(new Color(58, 112, 165));
     find.setToolTipText("");
     find.setText("Search");
     find.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -795,15 +782,14 @@ for(int i=0;i<whoaddmesip.size();i++){
         sendPacket=new
         DatagramPacket(data,s.length(),InetAddress.getByName(whoips),sendPort);
              sendSocket.send(sendPacket);
-}//for
+}
           } catch(IOException e2){sendtext.append(sendtext.getText());
                  e2.printStackTrace();}
-//end offline
+
 
 
      out.println("logout");
      out.println(myjid);
-     //socket.close();
       System.exit(0);
 
     }
@@ -820,7 +806,6 @@ jPopupMenu1.show(this,e.getX()+20,e.getY()+20);
  DirectAdd.setLocationRelativeTo(MainWin.this);
  DirectAdd.setSize(260,160);
 DirectAdd.show();
-// JOptionPane.showMessageDialog(this,"：-（Sorry.hg","ok",JOptionPane.INFORMATION_MESSAGE);
 
   }
 
@@ -850,17 +835,16 @@ System.out.println(theip);
   void find_mouseClicked(MouseEvent e) {
 
 findf.show();
-}//find
+}
 
   void send_mouseClicked(MouseEvent e) {
 //*********send message
     try{
        String s=sendtext.getText().trim();
-      // System.out.println(s);
       byte[] data=s.getBytes();
       System.out.println(theip);
       theip.trim();
-       if (theip.equals("null")||theip.equals(" ")||theip.equals("0")){JOptionPane.showMessageDialog(this,"：-（对不起,不在线","ok",JOptionPane.INFORMATION_MESSAGE);
+       if (theip.equals("null")||theip.equals(" ")||theip.equals("0")){JOptionPane.showMessageDialog(this,"：-offline","ok",JOptionPane.INFORMATION_MESSAGE);
                                 }
 
       else{
@@ -871,7 +855,7 @@ findf.show();
           } catch(IOException e2){sendtext.append(sendtext.getText());
                  e2.printStackTrace();}
         senddata.dispose();
-//*******end send message
+//end send message
   }
 
   void getmessage_mousePressed(MouseEvent e) {
@@ -906,10 +890,9 @@ if(status.get(p).equals("1")){
      mm2.addElement(new Object[]{tempname.get(p),new ImageIcon(picsonline[picid])});}
 else {
  mm2.addElement(new Object[]{tempname.get(p),new ImageIcon(picsonline[picid])});}
-//picid=Integer.parseInt(temppic.get(p).toString());
-//mm2.addElement(new Object[]{tempname.get(p),new ImageIcon(picsonline[picid])});
 
-     }//for
+
+     }
 //add to friendlist
 for(int k=0;k<tempname.size();k++){
 friendnames.add(tempname.get(k));
@@ -919,8 +902,7 @@ picno.add(temppic.get(k));
 status.add(tempstatus.get(k));
 friendemail.add(tempemail.get(k));
 friendinfo.add(tempinfo.get(k));
-}//for
-//clean tmp
+}
 for(int p=0;p<tempname.size();p++){
 findf.tmpip.removeAllElements();
 findf.tmpjid.removeAllElements();
@@ -948,7 +930,7 @@ friendnames.removeElementAt(index2);
   status.removeElementAt(index2);
   friendemail.removeElementAt(index2);
   friendinfo.removeElementAt(index2);
-  }//////////////delfriend
+  }
 //tell friend i am online
   void online_mouseClicked(MouseEvent e) {
 out.println("getwhoaddme");
@@ -975,7 +957,7 @@ for(int i=0;i<whoaddmesip.size();i++){
         sendPacket=new
         DatagramPacket(data,s.length(),InetAddress.getByName(whoips),sendPort);
              sendSocket.send(sendPacket);
-}//for
+}
           } catch(IOException e2){sendtext.append(sendtext.getText());
                  e2.printStackTrace();System.exit(1);}
 
