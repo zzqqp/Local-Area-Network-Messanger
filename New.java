@@ -5,13 +5,13 @@ import java.net.*;
 import java.io.*;
 public class New extends JFrame {//Log in Window
   JPanel contentPane;
-//*****************
+
  String server;
  int serport;
   private Socket socket;
 private BufferedReader in;
 private PrintWriter out;
-//***********//Interface
+//Interface
   JPanel jPanel1 = new JPanel();
   JLabel jLabel1 = new JLabel();
   JLabel jLabel2 = new JLabel();
@@ -40,7 +40,6 @@ private PrintWriter out;
     this.setResizable(false);
     this.setSize(new Dimension(344, 245));
     this.setTitle("New ID");
-    //contentPane.add(text, null);
     jPanel1.setBounds(new Rectangle(2, 3, 348, 110));
     jPanel1.setLayout(null);
     jLabel1.setText("Your Info");
