@@ -130,9 +130,6 @@ out.println(password.getPassword());
             MainWin f2=new MainWin(g,server,serport);
             f2.setVisible(true);
                }
-
-        //System.out.println("\n");
-        //}while(!str.equals("ok"));
     }catch(IOException e1){}
   }
 
